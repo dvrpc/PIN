@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Philadelphia Neighborhoods</title>
+
+    <!-- Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css"> <!--https://github.com/jharding/typeahead.js-bootstrap.css-->
+    <link href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" rel="stylesheet" type="text/css">
+    <!--[if lte IE 8]>
+        <link href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" rel="stylesheet" type="text/css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <style>
+        html, body, #map, #sidebar, #container {
+            height: 100%;
+            margin: 0px;
+        }
+		#sidebar{
+		background-color:#848484;
+		border-right: 1px solid black;
+		}
+        body {
+            padding-top: 50px;
+        }
+        label {
+            font-weight: normal;
+        }
+        .panel-heading a:hover {
+            text-decoration: none;
+        }
+        #loading {
+            position: absolute;
+            width: 220px;
+            height: 19px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -110px;
+            z-index: 20001;
+        }
+        .navbar .navbar-brand {
+            font-weight: bold;
+            font-size: 22px;
+            color: white;
+            white-space: nowrap;
+        }
+        .tt-dropdown-menu {
+            overflow: auto;
+        }
+        .tt-hint, .tt-query {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        .typeahead-header {
+            margin: 0 5px 5px 5px;
+            padding: 3px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .search-container {
+            width: 250px;
+        }
+        #searchbox {
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-bottom-left-radius: 4px;
+            -moz-border-top-left-radius: 4px;
+            -moz-border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .leaflet-popup-content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        a.toggle {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            display: block;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+            -webkit-border-top-right-radius: 4px !important;
+            -moz-border-top-right-radius: 4px !important;
+            border-top-right-radius: 4px !important;
+            -webkit-border-bottom-right-radius: 4px !important;
+            -moz-border-bottom-right-radius: 4px !important;
+            border-bottom-right-radius: 4px !important;
+            background-color: #222;
+            color: white;
+            opacity: 0.8;
+            z-index: 100;
+        }
+        a:hover.toggle {
+            background-color: #222;
+            color: white;
+            opacity: 1;
+        }
+        @media (max-width: 992px) {
+            .navbar .navbar-brand {
+                font-size: 18px;
+                float: left;
+            }
+            .search-container {
+                width: 150px;
+            }
+            .leaflet-control-attribution {
+                display: none;
+            }
+        }
+        @media (max-width: 768px){
+            .search-container {
+                width: 100%;
+            }
+        }
+        /* Print Handling */
+        @media print {
+            .navbar, .toggle, #sidebar {
+                display: none !important;
+            }
+        }
+		.btn-primary{
+		background-color:black;
+		border-color:white;
+		}
+		
+		.leaflet-label{
+	background: #CECECE;
+	background-clip: padding-box;
+	border-color: black;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 2px;
+	color: black;
+	display: block;
+	font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	padding: 1px 6px;
+	position: absolute;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	white-space: nowrap;
+	z-index: 6;
+}
+.navbar-inverse{
+height:40px;
+}
+
+.panel-default, .panel-primary{
+border-color:black;
+}
+.modal-header{
+background-color:black;
+}
+.btn:hover{
+background-color:#C7C7C7;
+color:black;
+border:none;
+}
+.btn-sm btn-block{
+border-color:black;
+}
+.btn {
+border-color:black;
+background-color:#E2E2E2;
+color:black;
+}
+.close{
+color:white;
+opacity:1;
+}
+.panel-group .panel-heading{
+background-color:#E2E2E2;
+border-bottom: 1px solid #565656;
+}
+.panel{
+border: none;
+}
+.selected {
+    background-color: #000;
+    color: white !important;;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+ #info-box {
+      background-color: white;
+      border: 1px solid grey;
+      top: 70px;
+      height: 30px;
+      padding: 5px;
+      position: absolute;
+      left: 500px;
+	  font-weight:bold;
+	  color: #2892C7;
+    }
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script src="js/css3-mediaqueries.ie.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+     <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+			<a  href="http://www.dvrpc.org" target="_new"> <img class="pull-left"  src="img/logo.png"/></a> 
+		     <a class="navbar-brand " href="#">Philadelphia Neighborhoods</a>
+			</span> 
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
+                <li class="dropdown">
+                    <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-globe" style="color: white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+							<li  id="zoomToRegion"><a href="javascript:void(0);"><i class="icon-fullscreen"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+                  <!--       <li><a href="#" onclick="$('#legendModal').modal('show'); return false;"><i class="icon-picture"></i>&nbsp;&nbsp;Show Legend</a></li> -->
+                    </ul>
+                </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+    </div>
+<!-- Main Container -->
+ <div class="row" id="container">
+     <div class="col-sm-3 col-lg-3" id="sidebar" style="padding: 10px; overflow: auto;">
+		<div class="input-group search-container" style="margin: 5px 0px 0px 10px;" >
+                   <input id="address" type="text" placeholder="Enter a street address" class="form-control" style="width:200px;">
+                     <span class="input-group-addon"onclick="codeAddress()"><i class="glyphicon glyphicon-search"style="color:black;"></i></span>
+					 <span class="input-group-addon"onclick="deleteOverlays();"><i class="glyphicon glyphicon-ban-circle"style="color:black;"></i></span>
+        </div> 
+		<div class="panel-group"style="margin:10px">
+            <div class="panel panel-primary">
+					   <div class="panel-heading" >
+								   <span class="small text-muted" style="color:black"><strong>Legend</strong></span>
+                         </div>				  
+                 <input id="points" type="checkbox" style="margin-left:10px;" onClick="toggleLayer(data2,'points')" checked/> <img src='img/LNH-01.png' width='30' height='30'>Large Neighborhood<br>
+			     <input id="polygons" type="checkbox"  style="margin-left:10px;"  onClick="toggleLayer(data3,'polygons')" checked/><img src='img/SNH-01.png' width='30' height='30'> Small Neighborhood<br>
+				 <input id="LesserKnown" type="checkbox"  style="margin-left:10px;"  onClick="toggleLayer(data4,'LesserKnown')" checked/><img src='img/LKN-01.png' width='30' height='30'> Lesser Known Neighborhood<br> 
+				 <input id="roadway" type="checkbox"  img src="img/LA-01.png" style="margin-left:10px;"   onClick="toggleLayer(data1,'roadway')" checked/> <img src='img/LA-01.png' width='30' height='30'> Large Areas
+             </div>	
+				 <div class="panel-group"  id="accordian" style="margin:10px 0px 10px 0px;">
+					<div class="panel body"style="border-color:black;">
+						<div class="panel-heading">
+							   <a data-toggle="collapse" data-parent="#accordion_" href="#2">
+                                   <span style="color:black"><b>Zoom To</b></span><br>
+							   </a>
+                         </div>
+							<div id="2" class="panel-collapse default ">
+                                <div class="panel-body" style="padding: 5px 15px;">
+							<div class="btn-group " >
+										<button type="button"  class="locBtn btn  btn-sm btn-block" id="zoomToStudy1" href="javascript:void(0);" ></i>&nbsp;&nbsp;Northeast</a></button>
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy2" href="javascript:void(0);"></i>&nbsp;&nbsp;Bridesburg - Kensington - Richmond</a></button>					
+										<button type="button"  class="locBtn btn btn-sm btn-block"id="zoomToStudy3" href="javascript:void(0);"></i>&nbsp;&nbsp;Olney - Oak Lane</button>
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy4" href="javascript:void(0);"></i>&nbsp;&nbsp;Germantown - Chestnut Hill</button>
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy5" href="javascript:void(0);"></i>&nbsp;&nbsp;Roxborough - Manayunk</a></button>					
+										<button type="button"  class="locBtn btn btn-sm btn-block"id="zoomToStudy6" href="javascript:void(0);"></i>&nbsp;&nbsp;North Philadelphia</button>
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy7" href="javascript:void(0);"></i>&nbsp;&nbsp;West Philadelphia</a></button>					
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy8" href="javascript:void(0);"></i>&nbsp;&nbsp;Center City</button>
+										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy9" href="javascript:void(0);"></i>&nbsp;&nbsp;South Philadelphia</a></button>					
+										<button type="button"  class="locBtn btn btn-sm btn-block"id="zoomToStudy10" href="javascript:void(0);"></i>&nbsp;&nbsp;Southwest Philadelphia</button>
+									</div>
+							   </div>
+                            </div>
+                    </div>
+                </div>	
+		<div class="panel panel-primary">
+			<div class="panel-heading" >
+				<span class="small text-muted" style="color:black"><strong>Neighborhood Info</strong></span>
+			</div>
+			<div class="panel-body" style="padding:3px">
+				<div id='infosidebar' style="margin-left:10px;">	</div>									
+			</div>    		
+		</div>			 
+	</div>
+</div>
+        <div class="col-sm-9 col-lg-9" id="map">
+        	 <div id='title'></div>	
+                   <div id="loading" style="display: block;">
+                        <div class="loading-indicator">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-info" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+        </div>		  
+        	<div id="info-box"></div>
+        </div>
+<!-- end Main Container -->
+
+	 <div class="modal fade" id="aboutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="color:white;"><strong>Philadelphia Neighborhoods</strong></h4>
+                </div>
+
+                <div class="modal-body">
+                     <ul id="aboutTabs" class="nav nav-tabs">
+                        <li class="active"><a href="#about" data-toggle="tab"><i class="icon-question-sign"></i>&nbsp;About</a></li>
+						<li><a href="#use" data-toggle="tab"><i class="icon-exclamation-sign"></i>&nbsp;How to Use</a></li>
+                        <li><a href="#disclaimer" data-toggle="tab"><i class="icon-exclamation-sign"></i>&nbsp;Disclaimer</a></li>
+						<li><a href="#contact" data-toggle="tab"><i class="icon-envelope"></i>&nbsp;Contact</a></li>
+                     
+                    </ul>
+                    <div id="aboutTabsContent" class="tab-content" style="padding-top: 10px;">
+                        <div class="tab-pane fade active in" id="about">
+								<p>
+						A web mapping application that provides location information of Philadelphia neighborhoods for the Philadelphia Inquirer  </p>    
+                        </div>
+                        <div class="tab-pane fade" id="use">
+                            <h3>Map Navigation:</h3>
+							<p>Click-and-drag on the map to pan, or use your mouse wheel to zoom in/out.You may also use the slider bar and arrow controls to zoom in/out of the map.
+							 Double-clicking on an area will also zoom in. If you hold down the Shift Key and drag a <Font color="red">box </Font>on the map, it will zoom into the area drawn. 
+									</p><br>
+							<p>Click <b>Zoom to extent</b> button to zoom to the initial map extent.</p>
+							<P>To view Google Street View drag <img src="img/gsv_icon2.png" /> from the left hand side onto the map. Any street highlighted blue has an available street level view.</P>		
+							<br>
+						</div>
+                      <div class="tab-pane fade" id="disclaimer">
+                            <p>This web page is a public resource of general information. The Delaware Valley Regional Commission (DVRPC) makes no warranty, 
+							representation, or guarantee as to the content, sequence, accuracy, timeliness, or completeness of any of the spatial data or database 
+							information provided herein. DVRPC and partner state, local, and other agencies shall assume no liability for errors, omissions, or 
+							inaccuracies in the information provided regardless of how caused; or any decision made or action taken or not taken by any person relying 
+							on any information or data furnished within.</p>
+                        </div>
+						<div class="tab-pane fade" id="contact">         
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 
+    <script type="text/javascript" src="js/keydragzoom.js"></script>  
+    <script type="text/javascript" src="js/main.js"></script>  
+  </body>
+</html>
