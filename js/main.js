@@ -180,7 +180,7 @@ data2.setStyle(function (feature) {
     });	
     
 data3 = new google.maps.Data();
-data3.loadGeoJson('data/small.js');
+data3.loadGeoJson('data/Small.js');
 data3.setMap(map);
 data3.setStyle(function (feature) {
     return { strokeColor: '#FF0000',
@@ -230,7 +230,7 @@ data4.addListener('click', function(e) {
         strokeWeight: 4
 		});
     });
-$.getJSON('data/Cnty.js', function(d) {
+$.getJSON('data/cnty.js', function(d) {
     var data = new google.maps.Data({map: map, style:{stroke:true,fillColor:'none', strokeColor: '#494949',weight: 1.5,fill: true, opacity: 1,fillOpacity:0, clickable: false }});
     data.addGeoJson(d);
 });		
