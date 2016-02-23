@@ -248,21 +248,23 @@ border: none;
                   <!--       <li><a href="#" onclick="$('#legendModal').modal('show'); return false;"><i class="icon-picture"></i>&nbsp;&nbsp;Show Legend</a></li> -->
                     </ul>
                 </li>
+                <li>
+                        <div class="input-group search-container" style="margin: 5px 0px 0px 10px;" >
+                   <input id="address" type="text" placeholder="Enter a street address" class="form-control" style="width:200px;">
+                     <span class="input-group-addon"onclick="codeAddress()"><i class="glyphicon glyphicon-search"style="color:black;"></i></span>
+                     <span class="input-group-addon"onclick="deleteOverlays();"><i class="glyphicon glyphicon-ban-circle"style="color:black;"></i></span>
+        </div> </li>
           </ul>
         </div><!--/.navbar-collapse -->
     </div>
 <!-- Main Container -->
  <div class="row" id="container">
      <div class="col-sm-3 col-lg-3" id="sidebar" style="padding: 10px; overflow: auto;">
-		<div class="input-group search-container" style="margin: 5px 0px 0px 10px;" >
-                   <input id="address" type="text" placeholder="Enter a street address" class="form-control" style="width:200px;">
-                     <span class="input-group-addon"onclick="codeAddress()"><i class="glyphicon glyphicon-search"style="color:black;"></i></span>
-					 <span class="input-group-addon"onclick="deleteOverlays();"><i class="glyphicon glyphicon-ban-circle"style="color:black;"></i></span>
-        </div> 
+	
 		<div class="panel-group"style="margin:10px">
             <div class="panel panel-primary">
 					   <div class="panel-heading" >
-								   <span class="small text-muted" style="color:black"><strong>Legend</strong></span>
+								   <span class="small text-muted" style="color:black"><strong>Layers</strong></span>
                          </div>				  
                  <input id="points" type="checkbox" style="margin-left:10px;" onClick="toggleLayer(data2,'points')" checked/> <img src='img/LNH-01.png' width='30' height='30'>Large Neighborhood<br>
 			     <input id="polygons" type="checkbox"  style="margin-left:10px;"  onClick="toggleLayer(data3,'polygons')" checked/><img src='img/SNH-01.png' width='30' height='30'> Small Neighborhood<br>
@@ -294,14 +296,14 @@ border: none;
                             </div>
                     </div>
                 </div>	
-		<div class="panel panel-primary">
+	<!--	<div class="panel panel-primary">
 			<div class="panel-heading" >
 				<span class="small text-muted" style="color:black"><strong>Neighborhood Info</strong></span>
 			</div>
 			<div class="panel-body" style="padding:3px">
 				<div id='infosidebar' style="margin-left:10px;">	</div>									
 			</div>    		
-		</div>			 
+		</div>	-->		 
 	</div>
 </div>
         <div class="col-sm-9 col-lg-9" id="map">
@@ -365,8 +367,9 @@ border: none;
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
     <script type="text/javascript" src="js/keydragzoom.js"></script>  
     <script type="text/javascript" src="js/main.js"></script>  
+    <script type="text/javascript" src="js/infobox.js"></script>  
   </body>
 </html>
