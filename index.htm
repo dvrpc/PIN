@@ -202,7 +202,7 @@ border: none;
     border-top-color: white;
     border-bottom-color: white;
 }
- #info-box {
+/* #info-box {
       background-color: white;
       border: 1px solid grey;
       top: 70px;
@@ -212,7 +212,7 @@ border: none;
       right: 20px;
 	  font-weight:bold;
 	  color: #2892C7;
-    }
+    } */
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -235,7 +235,7 @@ border: none;
                 <span class="icon-bar"></span>
             </button>
 			<a  href="http://www.dvrpc.org" target="_new"> <img class="pull-left"  src="img/logo.png"/></a> 
-		     <a class="navbar-brand " href="#">Philadelphia Neighborhoods</a>
+		     <a class="navbar-brand hidden-sm hidden-xs" href="#">Philadelphia Neighborhoods</a>
 			</span> 
         </div>
         <div class="navbar-collapse collapse">
@@ -269,13 +269,13 @@ border: none;
                  <input id="points" type="checkbox" style="margin-left:10px;" onClick="toggleLayer(data2,'points')" checked/> <img src='img/LNH-01.png' width='30' height='30'>Large Neighborhood<br>
 			     <input id="polygons" type="checkbox"  style="margin-left:10px;"  onClick="toggleLayer(data3,'polygons')" checked/><img src='img/SNH-01.png' width='30' height='30'> Small Neighborhood<br>
 				 <input id="LesserKnown" type="checkbox"  style="margin-left:10px;"  onClick="toggleLayer(data4,'LesserKnown')" checked/><img src='img/LKN-01.png' width='30' height='30'> Lesser Known Neighborhood<br> 
-				 <input id="roadway" type="checkbox"  img src="img/LA-01.png" style="margin-left:10px;"   onClick="toggleLayer(data1,'roadway')" checked/> <img src='img/LA-01.png' width='30' height='30'> Large Areas
+				 <input id="roadway" type="checkbox"  img src="img/LA-01.png" style="margin-left:10px;"   onClick="toggleLayer(data1,'roadway')" checked/> <img src='img/LA-01.png' width='30' height='30'> Large Area
              </div>	
 				 <div class="panel-group"  id="accordian" style="margin:10px 0px 10px 0px;">
 					<div class="panel body"style="border-color:black;">
 						<div class="panel-heading">
 							   <a data-toggle="collapse" data-parent="#accordion_" href="#2">
-                                   <span style="color:black"><b>Zoom To</b></span><br>
+                                   <span style="color:black"><b>Zoom to a Large Area</b></span><br>
 							   </a>
                          </div>
 							<div id="2" class="panel-collapse default ">
@@ -316,7 +316,7 @@ border: none;
                         </div>
                     </div>
         </div>		  
-        	<div id="info-box"></div>
+     <!--    	<div id="info-box"></div> -->
         </div>
 <!-- end Main Container -->
 
@@ -371,5 +371,6 @@ border: none;
     <script type="text/javascript" src="js/keydragzoom.js"></script>  
     <script type="text/javascript" src="js/main.js"></script>  
     <script type="text/javascript" src="js/infobox.js"></script>  
+
   </body>
 </html>
