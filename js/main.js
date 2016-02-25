@@ -181,7 +181,7 @@ data2.setStyle(function (feature) {
     });	
     
 data3 = new google.maps.Data();
-data3.loadGeoJson('data/Small.js');
+data3.loadGeoJson('data/smaller.js');
 data3.setMap(map);
 data3.setStyle(function (feature) {
     return { strokeColor: '#FF0000',
@@ -205,7 +205,7 @@ data3.setStyle(function (feature) {
     });
 	
 data4 = new google.maps.Data();
-data4.loadGeoJson('data/LesserKnown.js');
+data4.loadGeoJson('data/LKs.js');
 data4.setMap(map);
 data4.setStyle(function (feature) {
     return { strokeColor: '#fc9390',
@@ -244,7 +244,7 @@ $.getJSON('data/cnty.js', function(d) {
  data1.addListener('click', function(e) {
     //show an infowindow on click   
     infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#A800E6">'
-                  +e.feature.getProperty('Co_AltName') +"</font></b><br/>Large Area</div>")
+                  +e.feature.getProperty('Co_AltName') +"</font></b> (Large Area)</div>")
                   ;
     var anchor = new google.maps.MVCObject();
     anchor.set("position",e.latLng);
@@ -254,7 +254,7 @@ $.getJSON('data/cnty.js', function(d) {
 data2.addListener('click', function(e) {
     //show an infowindow on click   
     infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="grey">'
-                  +e.feature.getProperty('LNeigh') +"</font></b><br/>Large Neighborhood</div>")
+                  +e.feature.getProperty('LNeigh') +"</font></b> (Large)</div>")
                   ;
     var anchor = new google.maps.MVCObject();
     anchor.set("position",e.latLng);
@@ -262,9 +262,16 @@ data2.addListener('click', function(e) {
 });
 
 data3.addListener('click', function(e) {
-    //show an infowindow on click   
-    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#FF8800">'
-                  +e.feature.getProperty('SNeigh') +"</font></b><br/>Small Neighborhood</div>")
+     //show an infowindow on click   
+    if (e.feature.getProperty('TYPE')==='Smaller'){ var other = '';}
+    else { var other = '<br><font color="grey"><i>within ' +e.feature.getProperty('LNeigh')+' (Large)</font></i>';}
+
+    infoWindow.setContent('<div style="line-height:1.5;overflow:hidden;white-space:nowrap;">'
+                  +'<b><font color="#FF8800">'
+                  +e.feature.getProperty('SNeigh')
+                  +"</font></b> (Small)"
+                  +other
+                  +"</div>")
                   ;
     var anchor = new google.maps.MVCObject();
     anchor.set("position",e.latLng);
@@ -273,9 +280,16 @@ data3.addListener('click', function(e) {
 
 data4.addListener('click', function(e) {
     //show an infowindow on click   
-    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#BF0404">'
-                  +e.feature.getProperty('LKNeigh') +"</font></b><br/>Lesser Known Neighborhood</div>")
-                  ;
+    if (e.feature.getProperty('TYPE')==='Lesser Known'){ var other = '';}
+    else if (e.feature.getProperty('TYPE')==='Lesser Known (Smaller)'){ var other = '<br><font color="#FF8800"><i>within ' +e.feature.getProperty('SNeigh')+' (Smaller)</font></i>';}
+    else { var other = '<br><font color="grey"><i>within ' +e.feature.getProperty('LNeigh')+' (Large)</font></i>';}
+
+    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;">'
+                  +'<b><font color="#BF0404">'
+                  +e.feature.getProperty('LKNeigh')
+                  +"</font></b> (Lesser Known)"
+                  +other
+                  +"</div>");
     var anchor = new google.maps.MVCObject();
     anchor.set("position",e.latLng);
     infoWindow.open(map,anchor);
@@ -287,7 +301,7 @@ $("#zoomToStudy1").click(function(){
 });
  $("#zoomToStudy2").click(function(){
   map.setCenter(BKR);
-  map.setZoom(13);
+  map.setZoom(14);
 });
  $("#zoomToStudy3").click(function(){
   map.setCenter(OLOK);
@@ -311,7 +325,7 @@ $("#zoomToStudy1").click(function(){
 });
  $("#zoomToStudy8").click(function(){
   map.setCenter(CC);
-  map.setZoom(13);
+  map.setZoom(14);
 });
  $("#zoomToStudy9").click(function(){
   map.setCenter(SP);
