@@ -3,7 +3,7 @@
 	var streetViewService = new google.maps.StreetViewService();
 	var markersArray = [];
 	  
-	var region = new google.maps.LatLng(39.950143, -75.170669);
+	var region = new google.maps.LatLng(40.021042, -75.146484);
 	var philadelphia = new google.maps.LatLng(39.99342964441351, -75.15953063964844);
 	var NE = new google.maps.LatLng(40.0664842906,-75.0337813006);
 	var BKR = new google.maps.LatLng(39.9901632005,-75.0989542836);
@@ -107,7 +107,7 @@ geocoder = new google.maps.Geocoder();
   // Create a simple map.
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 11,
-    center: {lat: 39.950143, lng:-75.170669 },
+    center: {lat: 39.985275, lng:-75.146484 },
     mapTypeId: MY_MAPTYPE_ID,  
 	mapTypeControlOptions: {
 	mapTypeIds: [MY_MAPTYPE_ID, google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID],
@@ -131,6 +131,7 @@ data1.loadGeoJson('data/LargeAreas.js');
 data1.setMap(map);
 data1.setStyle(function (feature) {
     return { strokeColor: '#A800E6',
+    zIndex: 200,
     strokeOpacity: 0.8,
     strokeWeight:2,
     fillColor: 'none',
@@ -157,6 +158,7 @@ data2.loadGeoJson('data/LNH.js');
 data2.setMap(map);
 data2.setStyle(function (feature) {
     return { strokeColor: '#00FFC5',
+    zIndex: 201,
     strokeOpacity: 0.8,
     strokeWeight:2,
     fillColor: 'grey',
@@ -183,6 +185,7 @@ data3.loadGeoJson('data/Small.js');
 data3.setMap(map);
 data3.setStyle(function (feature) {
     return { strokeColor: '#FF0000',
+    zIndex: 202,
     strokeOpacity: 0.8,
     strokeWeight:1,
     fillColor: '#FF8800',
@@ -206,6 +209,7 @@ data4.loadGeoJson('data/LesserKnown.js');
 data4.setMap(map);
 data4.setStyle(function (feature) {
     return { strokeColor: '#fc9390',
+    zIndex: 203,
     strokeOpacity: 0.8,
     strokeWeight:2,
     fillColor: '#BF0404',
@@ -215,7 +219,6 @@ data4.setStyle(function (feature) {
 	clickable: true
    }
 	});
-  
 data4.addListener('click', function(e) {
 	data1.revertStyle();
     data2.revertStyle();
@@ -228,39 +231,54 @@ data4.addListener('click', function(e) {
         strokeWeight: 4
 		});
     });
+
 $.getJSON('data/cnty.js', function(d) {
     var data = new google.maps.Data({map: map, style:{stroke:true,fillColor:'none', strokeColor: '#494949',weight: 1.5,fill: true, opacity: 1,fillOpacity:0, clickable: false }});
     data.addGeoJson(d);
 });		
 
-data2.addListener('click', function(e) {
+//data2.addListener('click', function(e) {
+// var content ='<b>Neighborhood: </b>' +e.feature.getProperty('LNeigh');
+//   $('#infosidebar').html(content);
+//});
+ data1.addListener('click', function(e) {
     //show an infowindow on click   
-    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"> Feature id = '
-                  +e.feature.getId() +"<br/>Neighborhood:" + e.feature.getProperty('LNeigh') + "</div>")
+    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#A800E6">'
+                  +e.feature.getProperty('Co_AltName') +"</font></b><br/>Large Area</div>")
                   ;
     var anchor = new google.maps.MVCObject();
     anchor.set("position",e.latLng);
     infoWindow.open(map,anchor);
 });
 
-data1.addListener('click', function(e) {
-var content ='<b>Neighborhood: </b>' +e.feature.getProperty('Co_AltName');
-   $('#infosidebar').html(content);
-});
-
 data2.addListener('click', function(e) {
- var content ='<b>Neighborhood: </b>' +e.feature.getProperty('LNeigh');
-   $('#infosidebar').html(content);
+    //show an infowindow on click   
+    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="grey">'
+                  +e.feature.getProperty('LNeigh') +"</font></b><br/>Large Neighborhood</div>")
+                  ;
+    var anchor = new google.maps.MVCObject();
+    anchor.set("position",e.latLng);
+    infoWindow.open(map,anchor);
 });
 
 data3.addListener('click', function(e) {
-var content ='<b>Neighborhood: </b>' +e.feature.getProperty('SNeigh');
-   $('#infosidebar').html(content);
+    //show an infowindow on click   
+    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#FF8800">'
+                  +e.feature.getProperty('SNeigh') +"</font></b><br/>Small Neighborhood</div>")
+                  ;
+    var anchor = new google.maps.MVCObject();
+    anchor.set("position",e.latLng);
+    infoWindow.open(map,anchor);
 });
 
 data4.addListener('click', function(e) {
-var content ='<b>Neighborhood: </b>' +e.feature.getProperty('LKNeigh');
-   $('#infosidebar').html(content);
+    //show an infowindow on click   
+    infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;"><b><font color="#BF0404">'
+                  +e.feature.getProperty('LKNeigh') +"</font></b><br/>Lesser Known Neighborhood</div>")
+                  ;
+    var anchor = new google.maps.MVCObject();
+    anchor.set("position",e.latLng);
+    infoWindow.open(map,anchor);
 });	
    
 $("#zoomToStudy1").click(function(){
