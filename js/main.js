@@ -264,12 +264,12 @@ data2.addListener('click', function(e) {
 data3.addListener('click', function(e) {
      //show an infowindow on click   
     if (e.feature.getProperty('TYPE')==='Smaller'){ var other = '';}
-    else { var other = '<br><font color="grey"><i>within ' +e.feature.getProperty('LNeigh')+' (Large)</font></i>';}
+    else { var other = '<br><font color="grey"><i>of the ' +e.feature.getProperty('LNeigh')+' section</font></i>';}
 
     infoWindow.setContent('<div style="line-height:1.5;overflow:hidden;white-space:nowrap;">'
                   +'<b><font color="#FF8800">'
                   +e.feature.getProperty('SNeigh')
-                  +"</font></b> (Small)"
+                  +"</font></b> area (Small)"
                   +other
                   +"</div>")
                   ;
@@ -281,13 +281,13 @@ data3.addListener('click', function(e) {
 data4.addListener('click', function(e) {
     //show an infowindow on click   
     if (e.feature.getProperty('TYPE')==='Lesser Known'){ var other = '';}
-    else if (e.feature.getProperty('TYPE')==='Lesser Known (Smaller)'){ var other = '<br><font color="#FF8800"><i>within ' +e.feature.getProperty('SNeigh')+' (Smaller)</font></i>';}
-    else { var other = '<br><font color="grey"><i>within ' +e.feature.getProperty('LNeigh')+' (Large)</font></i>';}
+    else if (e.feature.getProperty('TYPE')==='Lesser Known (Smaller)'){ var other = '<br><font color="#FF8800"><i>of the ' +e.feature.getProperty('SNeigh')+' section</font></i>';}
+    else { var other = '<br><font color="grey"><i> of the ' +e.feature.getProperty('LNeigh')+' section</font></i>';}
 
     infoWindow.setContent('<div style="line-height:1.35;overflow:hidden;white-space:nowrap;">'
                   +'<b><font color="#BF0404">'
                   +e.feature.getProperty('LKNeigh')
-                  +"</font></b> (Lesser Known)"
+                  +"</font></b> area (Lesser Known)"
                   +other
                   +"</div>");
     var anchor = new google.maps.MVCObject();

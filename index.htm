@@ -240,7 +240,7 @@ border: none;
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-			        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
+			        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-info-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
                 <li class="dropdown">
                     <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-globe" style="color: white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -330,16 +330,19 @@ border: none;
 
                 <div class="modal-body">
                      <ul id="aboutTabs" class="nav nav-tabs">
-                        <li class="active"><a href="#about" data-toggle="tab"><i class="icon-question-sign"></i>&nbsp;About</a></li>
-						<li><a href="#use" data-toggle="tab"><i class="icon-exclamation-sign"></i>&nbsp;How to Use</a></li>
+                        <li class="active"><a href="#about" data-toggle="tab"><i class="icon-info-sign"></i>&nbsp;About</a></li>
+						<li><a href="#use" data-toggle="tab"><i class="icon-question-sign"></i>&nbsp;How to Use</a></li>
                         <li><a href="#disclaimer" data-toggle="tab"><i class="icon-exclamation-sign"></i>&nbsp;Disclaimer</a></li>
-						<li><a href="#contact" data-toggle="tab"><i class="icon-envelope"></i>&nbsp;Contact</a></li>
-                     
+                        
                     </ul>
                     <div id="aboutTabsContent" class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane fade active in" id="about">
-								<p>
-						A web mapping application that provides location information of Philadelphia neighborhoods for the Philadelphia Inquirer  </p>    
+							<p>Based on James Smart's Philadelphia Neighborhoods maps (June, 1988), these data layers comprise the "widely known neighborhoods" and "lesser known neighborhoods" whose names "may be used in copy without further explanation, on the presumption that most Philadelphia residents are familiar with their location."<br><br>It is important to note that the areas contained in these layers were not drawn from a base map, rather from street borders. Some of these "lesser known neighborhoods" have been excluded, simply because the borders were too vague to draw (e.g. "THE NECK - Once the entire lower part of South Philadelphia, later the lower east side of South Philadelphia, particularly around Second Street. Old-timers still use the name.")
+                            </p>    
+                            <p>
+						      This web mapping application was built by the <a href="http://www.dvrpc.org" target="_new">Delaware Valley Regional Planning Commission</a> for the Philadelphia Inquirer. Please contact Will Stevens for further information:  <a href="mailto:wstevens@dvrpc.org">wstevens@dvrpc.org</a>.</br>
+                              <font color='red' size='1px'><i>Data layers last updated: August 2011</i></font>
+                            </p>  
                         </div>
                         <div class="tab-pane fade" id="use">
                             <h3>Map Navigation:</h3>
@@ -350,14 +353,8 @@ border: none;
 							<P>To view Google Street View drag <img src="img/gsv_icon2.png" /> from the left hand side onto the map. Any street highlighted blue has an available street level view.</P>		
 							<br>
 						</div>
-                      <div class="tab-pane fade" id="disclaimer">
-                            <p>This web page is a public resource of general information. The Delaware Valley Regional Commission (DVRPC) makes no warranty, 
-							representation, or guarantee as to the content, sequence, accuracy, timeliness, or completeness of any of the spatial data or database 
-							information provided herein. DVRPC and partner state, local, and other agencies shall assume no liability for errors, omissions, or 
-							inaccuracies in the information provided regardless of how caused; or any decision made or action taken or not taken by any person relying 
-							on any information or data furnished within.</p>
-                        </div>
-						<div class="tab-pane fade" id="contact">         
+                        <div class="tab-pane fade" id="disclaimer">
+                            <p style="color:grey;font-size:80%;">This web page is a public resource of general information. The Delaware Valley Regional Commission (DVRPC) makes no warranty, representation, or guarantee as to the content, sequence, accuracy, timeliness, or completeness of any of the spatial data or database information provided herein. DVRPC and partner state, local, and other agencies shall assume no liability for errors, omissions, or inaccuracies in the information provided regardless of how caused; or any decision made or action taken or not taken by any person relying on any information or data furnished within.</p>  
                         </div>
                     </div>
                 </div>
