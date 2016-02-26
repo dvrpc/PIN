@@ -202,17 +202,13 @@ border: none;
     border-top-color: white;
     border-bottom-color: white;
 }
-/* #info-box {
-      background-color: white;
-      border: 1px solid grey;
-      top: 70px;
-      height: 30px;
-      padding: 5px;
-      position: absolute;
-      right: 20px;
-	  font-weight:bold;
-	  color: #2892C7;
-    } */
+#zoomToRegion {
+    background: white;
+    padding: 2px;
+    margin-right: 8px;
+    cursor: pointer;
+    cursor: hand;
+  }
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -241,13 +237,10 @@ border: none;
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
 			        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-info-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
-                <li class="dropdown">
-                    <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-globe" style="color: white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-							<li  id="zoomToRegion"><a href="javascript:void(0);"><i class="icon-fullscreen"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+                  <!--   <li  id="zoomToRegion"><a href="javascript:void(0);"><i class="icon-fullscreen"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li> -->
                   <!--       <li><a href="#" onclick="$('#legendModal').modal('show'); return false;"><i class="icon-picture"></i>&nbsp;&nbsp;Show Legend</a></li> -->
-                    </ul>
-                </li>
+          
+              
                 <li>
                         <div class="input-group search-container" style="margin: 5px 0px 0px 10px;" >
                    <input id="address" type="text" placeholder="Enter a street address" class="form-control" style="width:200px;">
@@ -274,13 +267,13 @@ border: none;
 				 <div class="panel-group"  id="accordian" style="margin:10px 0px 10px 0px;">
 					<div class="panel body"style="border-color:black;">
 						<div class="panel-heading">
-							   <a data-toggle="collapse" data-parent="#accordion_" href="#2">
-                                   <span style="color:black"><b>Zoom to a Large Area</b></span><br>
-							   </a>
+						 <a data-toggle="collapse" data-parent="#accordian" href="#2">
+                            <span style="color:black"><b>Zoom to a Large Area</b></span><br>
+						</a>
                          </div>
-							<div id="2" class="panel-collapse default ">
-                                <div class="panel-body" style="padding: 5px 15px;">
-							<div class="btn-group " >
+							<div id="2" class="panel-collapse in">
+                            <div class="panel-body" style="padding: 5px 15px;">
+							<div class="btn-group" >
 										<button type="button"  class="locBtn btn  btn-sm btn-block" id="zoomToStudy1" href="javascript:void(0);" ></i>&nbsp;&nbsp;Northeast</a></button>
 										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy2" href="javascript:void(0);"></i>&nbsp;&nbsp;Bridesburg - Kensington - Richmond</a></button>					
 										<button type="button"  class="locBtn btn btn-sm btn-block"id="zoomToStudy3" href="javascript:void(0);"></i>&nbsp;&nbsp;Olney - Oak Lane</button>
@@ -291,7 +284,7 @@ border: none;
 										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy8" href="javascript:void(0);"></i>&nbsp;&nbsp;Center City</button>
 										<button type="button"  class="locBtn btn btn-sm btn-block" id="zoomToStudy9" href="javascript:void(0);"></i>&nbsp;&nbsp;South Philadelphia</a></button>					
 										<button type="button"  class="locBtn btn btn-sm btn-block"id="zoomToStudy10" href="javascript:void(0);"></i>&nbsp;&nbsp;Southwest Philadelphia</button>
-									</div>
+								</div>
 							   </div>
                             </div>
                     </div>
@@ -314,9 +307,9 @@ border: none;
                                 <div class="progress-bar progress-bar-info" style="width: 100%"></div>
                             </div>
                         </div>
-                    </div>
-        </div>		  
-     <!--    	<div id="info-box"></div> -->
+             </div>
+        </div>
+        <div id="zoomToRegion"></div>		  
         </div>
 <!-- end Main Container -->
 
@@ -349,7 +342,7 @@ border: none;
 							<p>Click-and-drag on the map to pan, or use your mouse wheel to zoom in/out.You may also use the slider bar and arrow controls to zoom in/out of the map.
 							 Double-clicking on an area will also zoom in. If you hold down the Shift Key and drag a <Font color="red">box </Font>on the map, it will zoom into the area drawn. 
 									</p><br>
-							<p>Click <b>Zoom to extent</b> button to zoom to the initial map extent.</p>
+							<p>Click <b>Zoom to extent</b> button <img src="img/philly.png" style="width:27px;height:27px;"> to zoom to the initial map extent.</p>
 							<P>To view Google Street View drag <img src="img/gsv_icon2.png" /> from the left hand side onto the map. Any street highlighted blue has an available street level view.</P>		
 							<br>
 						</div>
