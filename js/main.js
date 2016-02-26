@@ -3,7 +3,7 @@
 	var streetViewService = new google.maps.StreetViewService();
 	var markersArray = [];
 	  
-	var region = new google.maps.LatLng(40.021042, -75.146484);
+	var region = new google.maps.LatLng(39.985275, -75.146484);
 	var philadelphia = new google.maps.LatLng(39.99342964441351, -75.15953063964844);
 	var NE = new google.maps.LatLng(40.0664842906,-75.0337813006);
 	var BKR = new google.maps.LatLng(39.9901632005,-75.0989542836);
@@ -347,7 +347,16 @@ data2.revertStyle();
 data3.revertStyle();
 data4.revertStyle();
 infoWindow.close();
-});  
+}); 
+
+var legend = document.getElementById('zoomToRegion');
+var div = document.createElement('div');
+content = '<img src="img/philly.png" style="width:27px;height:27px; alt="zoom to extent">';
+div.innerHTML = content;
+legend.appendChild(div);
+        
+
+map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend); 
 
 }
 google.maps.event.addDomListener(window, 'load', initialize);
